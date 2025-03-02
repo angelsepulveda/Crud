@@ -18,8 +18,7 @@ Este proyecto es una API CRUD desarrollada en .NET 8. Proporciona una estructura
 
 1. Clona el repositorio:
     ```sh
-    git clone <https://github.com/angelsepulveda/Crud.git>
-    cd Crud
+    git clone https://github.com/angelsepulveda/Crud.git
     ```
 
 2. Restaura los paquetes NuGet:
