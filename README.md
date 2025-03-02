@@ -49,7 +49,7 @@ Para construir y ejecutar la API usando Docker:
 
 1. Construye la imagen de Docker y levantarlo:
     ```sh
-    docker-compose up --build .
+    docker-compose up --build
     ```
 
 ## Uso
