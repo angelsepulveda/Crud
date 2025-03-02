@@ -1,3 +1,3 @@
 namespace Memberships.Submodules.Roles.Dtos;
 
-public sealed record RolDto(Guid Id, string Name);
+public sealed record RoleDto(Guid Id, string Name);

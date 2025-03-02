@@ -4,12 +4,12 @@ using Memberships.Submodules.Roles.Features.Register;
 
 namespace Memberships.UnitTests.Submodules.Roles.Features;
 
-public class RegisterRolHandlerUnitTest
+public class RegisterRoleHandlerUnitTest
 {
     private readonly Mock<MembershipDbContext> _dbContextMock;
-    private readonly RegisterRolHandler _handler;
+    private readonly RegisterRoleHandler _handler;
 
-    public RegisterRolHandlerUnitTest()
+    public RegisterRoleHandlerUnitTest()
     {
         DbContextOptions<MembershipDbContext> options =
             new DbContextOptionsBuilder<MembershipDbContext>()
@@ -17,26 +17,26 @@ public class RegisterRolHandlerUnitTest
                 .Options;
 
         _dbContextMock = new Mock<MembershipDbContext>(options);
-        _handler = new RegisterRolHandler(_dbContextMock.Object);
+        _handler = new RegisterRoleHandler(_dbContextMock.Object);
     }
 
     [Fact]
     public async Task Handle_ShouldRegisterRolSuccessfully()
     {
         // Arrange
-        RegisterRolCommand command = new(new RegisterRolPayload("Admin"));
-        _dbContextMock.Setup(db => db.Roles.Add(It.IsAny<Rol>())).Verifiable();
+        RegisterRoleCommand command = new(new RegisterRolePayload("Admin"));
+        _dbContextMock.Setup(db => db.Roles.Add(It.IsAny<Role>())).Verifiable();
         _dbContextMock
             .Setup(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(1);
 
         // Act
-        RolDto result = await _handler.Handle(command, CancellationToken.None);
+        RoleDto result = await _handler.Handle(command, CancellationToken.None);
 
         // Assert
         Assert.NotNull(result);
         Assert.Equal("Admin", result.Name);
-        _dbContextMock.Verify(db => db.Roles.Add(It.IsAny<Rol>()), Times.Once);
+        _dbContextMock.Verify(db => db.Roles.Add(It.IsAny<Role>()), Times.Once);
         _dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
 
@@ -44,11 +44,11 @@ public class RegisterRolHandlerUnitTest
     public void Validator_ShouldHaveValidationError_WhenNameIsEmpty()
     {
         // Arrange
-        RegisterRolCommandValidator validator = new RegisterRolCommandValidator();
-        RegisterRolCommand command = new(new RegisterRolPayload(""));
+        RegisterRoleCommandValidator validator = new RegisterRoleCommandValidator();
+        RegisterRoleCommand command = new(new RegisterRolePayload(""));
 
         // Act
-        TestValidationResult<RegisterRolCommand>? result;
+        TestValidationResult<RegisterRoleCommand>? result;
         result = validator.TestValidate(command);
 
         // Assert
@@ -59,11 +59,11 @@ public class RegisterRolHandlerUnitTest
     public void Validator_ShouldNotHaveValidationError_WhenNameIsValid()
     {
         // Arrange
-        RegisterRolCommandValidator validator = new();
-        RegisterRolCommand command = new(new RegisterRolPayload("Admin"));
+        RegisterRoleCommandValidator validator = new();
+        RegisterRoleCommand command = new(new RegisterRolePayload("Admin"));
 
         // Act
-        TestValidationResult<RegisterRolCommand>? result = validator.TestValidate(command);
+        TestValidationResult<RegisterRoleCommand>? result = validator.TestValidate(command);
 
         // Assert
         result.ShouldNotHaveValidationErrorFor(x => x.Payload.Name);

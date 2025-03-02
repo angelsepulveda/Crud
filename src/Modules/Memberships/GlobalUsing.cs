@@ -14,3 +14,4 @@ global using Microsoft.EntityFrameworkCore.Diagnostics;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using Shared.Data;
+global using Shared.Exceptions;

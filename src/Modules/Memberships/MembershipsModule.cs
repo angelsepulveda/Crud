@@ -1,3 +1,4 @@
+using Memberships.Submodules.Roles;
 using Shared.Constants;
 using Shared.Data.Interceptors;
 
@@ -24,6 +25,8 @@ public static class MembershipsModule
             }
         );
 
+        services.AddMembershipSubModules();
+
         return services;
     }
 
@@ -32,5 +35,12 @@ public static class MembershipsModule
         app.UseMigration<MembershipDbContext>();
 
         return app;
+    }
+
+    private static IServiceCollection AddMembershipSubModules(this IServiceCollection services)
+    {
+        services.AddSubModuleRoles();
+
+        return services;
     }
 }

@@ -44,11 +44,11 @@ Para construir y ejecutar la API localmente:
 
 ### Con Docker
 
-Para construir y ejecutar la API usando Docker:
+Para construir la imagen de la database:
 
 1. Construye la imagen de Docker y levantarlo:
     ```sh
-    docker-compose up --build
+    docker-compose up -d
     ```
 
 ## Uso
@@ -56,6 +56,9 @@ Para construir y ejecutar la API usando Docker:
 La API expone los siguientes endpoints:
 
 - `POST /api/roles`: Crea un nuevo rol.
+- `GET /api/roles`: Obtener listado de roles.
+- `PUT /api/roles`: Actualizar un rol.
+- `PUT /api/roles/{id}`: eliminiar un rol.
 
 ## Pruebas
 

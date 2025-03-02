@@ -3,9 +3,9 @@ using Memberships.Submodules.Roles.ValueObjects;
 
 namespace Memberships.Data.Configurations;
 
-public class ActionConfiguration : IEntityTypeConfiguration<Rol>
+public class ActionConfiguration : IEntityTypeConfiguration<Role>
 {
-    public void Configure(EntityTypeBuilder<Rol> builder)
+    public void Configure(EntityTypeBuilder<Role> builder)
     {
         builder.ToTable("roles");
 
@@ -13,7 +13,7 @@ public class ActionConfiguration : IEntityTypeConfiguration<Rol>
 
         builder
             .Property(p => p.Id)
-            .HasConversion(id => id.Value.ToString(), v => new RolId(Guid.Parse(v)))
+            .HasConversion(id => id.Value.ToString(), v => new RoleId(Guid.Parse(v)))
             .HasColumnType("char(36)")
             .HasColumnName("id");
 
