@@ -11,9 +11,10 @@ public class RegisterRolHandlerUnitTest
 
     public RegisterRolHandlerUnitTest()
     {
-        DbContextOptions<MembershipDbContext> options = new DbContextOptionsBuilder<MembershipDbContext>()
-            .UseInMemoryDatabase(databaseName: "TestDatabase")
-            .Options;
+        DbContextOptions<MembershipDbContext> options =
+            new DbContextOptionsBuilder<MembershipDbContext>()
+                .UseInMemoryDatabase(databaseName: "TestDatabase")
+                .Options;
 
         _dbContextMock = new Mock<MembershipDbContext>(options);
         _handler = new RegisterRolHandler(_dbContextMock.Object);
