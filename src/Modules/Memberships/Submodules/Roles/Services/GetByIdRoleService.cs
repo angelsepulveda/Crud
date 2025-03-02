@@ -9,7 +9,7 @@ public class GetByIdRoleService(MembershipDbContext dbContext) : IGetByIdRoleSer
 {
     public async Task<Role> HandleAsync(RoleId id)
     {
-        Role? rol = await dbContext.Roles.Where(x => x.Id == id).FirstOrDefaultAsync();
+        Role? rol = await dbContext.Roles.Where(x => x.Id == id && x.Enable).FirstOrDefaultAsync();
 
         if (rol is null)
             throw new RolNotFoundException(id.Value);
