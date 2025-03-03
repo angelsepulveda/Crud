@@ -16,6 +16,7 @@ public sealed class GetAllRoleHandler(MembershipDbContext dbContext)
         List<Role> roles = await dbContext.Roles
             .AsNoTracking()
             .Where(x => x.Enable)
+            .OrderByDescending(x => x.CreatedAt)
             .ToListAsync(cancellationToken);
 
         return roles.Select(x => new RoleDto(x.Id.Value, x.Name)).ToList();
