@@ -15,3 +15,4 @@ global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using Shared.Data;
 global using Shared.Exceptions;
+global using Shared.Constants;
